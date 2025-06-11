@@ -65,18 +65,32 @@ app.get('/departamentos', async function (req, res) {
 
 
 //PEDIDOS BACK DE PELICULAS
+// titulo, img y la categoria todo por el query; y try catch
+
+
+
 
 app.get('/peliculas', async function (req, res) {
-    let respuesta;
-    respuesta = await realizarQuery(`SELECT * FROM Peliculas WHERE id_pelicula=${req.query.id}`);
-    res.send(respuesta)
+    try {
+        let parametro = req.query.parametro
+
+        let respuesta;
+        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id}`);
+        res.send(respuesta)
+    } catch (error) {
+        res.send(error)
+    }
 
 });
 
 app.delete('/borrarPeliculas', async function (req, res) {
+   try {
     await realizarQuery(`
         DELETE FROM Peliculas WHERE id_pelicula = '${req.body.id}'`)
     res.send("Se elimino correctamente")
+   } catch (error) {
+        res.send(error)
+   }
 
 })
 
