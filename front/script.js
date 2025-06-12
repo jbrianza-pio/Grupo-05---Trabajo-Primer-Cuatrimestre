@@ -26,28 +26,22 @@ function seleccionIncial(category){
     return peliculaSec1, peliculaSec2    //falta devolver bien  valores
 }
 
-//compara cuales mayor y guarda la variable
-function compare(category,peliculaSec1,peliculaSec2){
-    let mayor
-    if (peliculaSec1.category>peliculaSec2.category){
-        mayor=peliculaSec1
-    }if (peliculaSec2.category>peliculaSec1.category){
-        mayor=peliculaSec1
-    }else{
-        mayor="igual"
-    }
-    return mayor
-}
-
 //prepara las variables para el juego luego de la seleccion
-function changeGame(){
-    let category = getCategory()//falta definir variable y UI // DOM
+function changeGame(category){
+    change()//falta hacer ui y DOM
     seleccionIncial(category)
-    let corretcAnswer = compare(category,peliculaSec1,peliculaSec2)
 }
 
 //inicia la finalizacion luego de elegir
 function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
+    let selecctionAnswer
+    if (peliculaSec1.category>peliculaSec2.category){
+        selecctionAnswer=peliculaSec1
+    }if (peliculaSec2.category>peliculaSec1.category){
+        selecctionAnswer=peliculaSec1
+    }else{
+        selecctionAnswer="igual"
+    }
     if (selecctionAnswer==corretcAnswer || selecctionAnswer=="igual") {
         replaceSelection()
     }else{
@@ -57,7 +51,7 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
 
 //termina y vuelve a pantalla inicial
 function finalizer(){
-
+    
 }
 
 //cambia de posicion y busca nueva peli
@@ -65,5 +59,4 @@ function replaceSelection(category){
     peliculaSec1 = peliculaSec2
     peliculaSec2 = selectRandomPeli(category);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
-    let corretcAnswer = compare(category,peliculaSec1,peliculaSec2)
 }
