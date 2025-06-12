@@ -4,6 +4,7 @@ let peliculaSec1
 let peliculaSec2
 let category
 let point 
+let id_user
 
 function getRandomInt(){
     let random = Math.floor(Math.random() * max );//establecer limite de pelicula
@@ -68,14 +69,25 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
         point++
         replaceSelection()
     }else{
-        finalizer()
+        let maxPoint = getMaxPoint(id_user) //establecer funcion fetch get max puntos. 
+        // Parametro dado ID de user. Parametro a espera Max Points
+        if(maxPoint<point){
+            maxPoint=point
+            setMaxPoint(id_user,maxPoint)//establecer funcion fetch set max puntos (user)
+            
+
+        // Parametro dado ID de user y puntos max.
+            let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
+        // Parametro recibe el decimo puesto de la tabla (puntaje)
+            if(tenPlace<maxPoint){
+                deleteLastMaxPoint()//establecer funcion fetch delete last max puntos 
+                postMaxPoint(id_user,maxPoint)//establecer funcion post max puntos 
+                //parametro dado id del user y puntos maximos
+            }
+            replaceModalFinal(maxPoint,point)//falta definir variable y UI // DOM
+            modalFinal()//falta definir variable y UI // DOM
+        }
     }
-}
-
-//termina y vuelve a pantalla inicial
-function finalizer(){
-    modalFinal()//falta definir variable y UI // DOM
-
 }
 
 //cambia de posicion y busca nueva peli
