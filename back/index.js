@@ -100,7 +100,7 @@ app.post('/insertarPeliculas', async function (req, res) {
         if (check.length == 0) {
             await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, fecha, ganancia, link )
                 VALUES ("${req.body.titulo}", "${req.body.voto_espectadores}", "${req.body.fecha}", "${req.body.ganancia}", "${req.body.link}");`)
-            res.send({ mensaje: "Departamento agregado correctamente" });
+            res.send({ mensaje: "Pelicula agregada correctamente" });
         }
         else {
             res.send({ mensaje: "Pelicula ya existe" })
