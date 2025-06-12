@@ -1,6 +1,13 @@
+//Funciones base
+
+let peliculaSec1
+let peliculaSec2
+let category
+let point 
+
 function getRandomInt(){
-        let random = Math.floor(Math.random() * max );//establecer limite de pelicula
-        return random
+    let random = Math.floor(Math.random() * max );//establecer limite de pelicula
+    return random
 }
 function selectRandomPeli(category){
     let good = 0;
@@ -17,32 +24,48 @@ function selectRandomPeli(category){
     return -1
 }
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+
+//seccion inicio
+
 // elige y pone las peliculas iniciales
-function seleccionIncial(category){
-    let peliculaSec1 =selectRandomPeli(category);
+function seleccionIncial(){
+    point=0
+    peliculaSec1 =selectRandomPeli(category);
     replaceSec1(peliculaSec1); //falta definir variable y UI // DOM
-    let peliculaSec2 =selectRandomPeli(category);
+    peliculaSec2 =selectRandomPeli(category);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
-    return peliculaSec1, peliculaSec2    //falta devolver bien  valores
 }
 
 //prepara las variables para el juego luego de la seleccion
-function changeGame(category){
+function changeGame(buttonCategory){
+    category = buttonCategory
     change()//falta hacer ui y DOM
     seleccionIncial(category)
 }
 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+
+//seccion finalizo
+
+
 //inicia la finalizacion luego de elegir
 function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
-    let selecctionAnswer
     if (peliculaSec1.category>peliculaSec2.category){
-        selecctionAnswer=peliculaSec1
+        correctAnswer=peliculaSec1
     }if (peliculaSec2.category>peliculaSec1.category){
-        selecctionAnswer=peliculaSec1
+        correctAnswer=peliculaSec1
     }else{
-        selecctionAnswer="igual"
+        correctAnswer="igual"
     }
-    if (selecctionAnswer==corretcAnswer || selecctionAnswer=="igual") {
+    if (selecctionAnswer==corretcAnswer || correctAnswer=="igual") {
+        point++
         replaceSelection()
     }else{
         finalizer()
@@ -51,12 +74,14 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
 
 //termina y vuelve a pantalla inicial
 function finalizer(){
-    
+    modalFinal()//falta definir variable y UI // DOM
+
 }
 
 //cambia de posicion y busca nueva peli
-function replaceSelection(category){
+function replaceSelection(){
     peliculaSec1 = peliculaSec2
+    replaceSec1(peliculaSec1); //falta definir variable y UI // DOM
     peliculaSec2 = selectRandomPeli(category);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
 }
