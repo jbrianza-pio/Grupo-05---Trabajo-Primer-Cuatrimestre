@@ -34,6 +34,26 @@ app.post('/users', async function (req, res) {
     }
 })
 
+
+//Esta función checkea que primero exista un usuario con ese nombre y luego checkea si la contraseña y el usuario coinciden 
+app.get('/users', async function (req, res) {
+    try {
+        let checkUsuario = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}"`)
+        if (checkUsuario == undefined) {
+            res.send("No se ha encontrado ningun usuario con ese nombre")
+        } else if (checkUsuario > 0) {
+            let checkContraseña = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}" AND password = "${req.query.password}"`)
+            if (checkContraseña == undefined) {
+                res.send("No coincide la contraseña")
+            } else if (checkUsuario == checkContraseña) {
+                res.send(checkContraseña)
+            }
+        }
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+})
+
 //Los usuarios para el ranking de los 10 mejores
 app.get('/usersRanking', async function (req, res) {
     try {
