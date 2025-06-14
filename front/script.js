@@ -103,8 +103,8 @@ function register() {
 function login(){
     let check = fetchGetUsuarioLogin(getUser(), getPassword()) //Lo mismo que con el register, que la función reciba los parámetros y los compare
     if (check > 0){
-        changescreen()
-    } else if(check == 0){ //La función hecha en el back de usuarios conseguirá el usuarioy la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
+        changeScreen()
+    } else if(check == 0){ //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
         showModal("Error", "No se ha ingresado correctamente la contraseña")
     } else if(check == -1){
         showModal("Error", "El usuario ingresado no existe")
