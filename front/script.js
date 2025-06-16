@@ -44,7 +44,7 @@ function seleccionIncial(){
 //prepara las variables para el juego luego de la seleccion
 function changeGame(buttonCategory){
     category = buttonCategory
-    change()//falta hacer ui y DOM
+    changeScreen()//falta hacer ui y DOM
     seleccionIncial(category)
 }
 
@@ -74,8 +74,6 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
         if(maxPoint<point){
             maxPoint=point
             setMaxPoint(id_user,maxPoint)//establecer funcion fetch set max puntos (user)
-            
-
         // Parametro dado ID de user y puntos max.
             let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
         // Parametro recibe el decimo puesto de la tabla (puntaje)
@@ -85,7 +83,7 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
                 //parametro dado id del user y puntos maximos
             }
             replaceModalFinal(maxPoint,point)//falta definir variable y UI // DOM
-            modalFinal()//falta definir variable y UI // DOM
+            showModalFinal()//falta definir variable y UI // DOM
         }
     }
 }
