@@ -24,6 +24,10 @@ replaceSec2(peliculaSec2){
 replaceModalFinal(maxPoint,point){
 
 }
-modalFinal(){
-
+showModal(){ //agregarle el nombre
+    //modalid.showModal()
 }
+closeModal(){//agregarle el nombre
+    //modalid.close()
+}
+//const modalLogin = document.getElementById("modal-name")//encuentra con el modalid el elemento
