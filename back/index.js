@@ -65,6 +65,56 @@ app.get('/usersRanking', async function (req, res) {
     }
 })
 
+
+
+
+
+//PEDIDOS BACK DE PELICULAS
+// titulo, img y la categoria todo por el query; y try catch
+
+
+
+
+app.get('/peliculas', async function (req, res) {
+    try {
+        let parametro = req.query.parametro
+
+        let respuesta;
+        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id}`);
+        res.send(respuesta)
+    } catch (error) {
+        res.send(error)
+    }
+
+});
+
+app.delete('/borrarPeliculas', async function (req, res) {
+   try {
+    await realizarQuery(`
+        DELETE FROM Peliculas WHERE id_pelicula = '${req.body.id}'`)
+    res.send("Se elimino correctamente")
+   } catch (error) {
+        res.send(error)
+   }
+
+})
+
+app.post('/insertarPeliculas', async function (req, res) {
+    try {
+        let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND voto_espectadores = "${req.body.voto_espectadores}"  AND fecha = "${req.body.fecha}" AND ganancia = "${req.body.ganancia} AND link = "${req.body.link}`)
+        if (check.length == 0) {
+            await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, fecha, ganancia, link )
+                VALUES ("${req.body.titulo}", "${req.body.voto_espectadores}", "${req.body.fecha}", "${req.body.ganancia}", "${req.body.link}");`)
+            res.send({ mensaje: "Pelicula agregada correctamente" });
+        }
+        else {
+            res.send({ mensaje: "Pelicula ya existe" })
+        }
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+});
+
 //Obtiene el puntaje de la cuenta a partir del id de usuario (recordar que el id de usuario se obtuvo anteriormente, cuando se logueó)
 app.get('/recordPuntaje', async function (req, res) {
     try {
@@ -98,3 +148,4 @@ app.listen(port, () => {
 
 //Para cambiar el auto-increment del SQL si se generan usuarios que de prueba:
 //ALTER TABLE Usuarios AUTO_INCREMENT = 1
+
