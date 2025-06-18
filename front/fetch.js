@@ -19,7 +19,7 @@ async function fetchPostPeliculas(titulo, voto_espectadores, fecha, ganancia, li
         titulo: titulo,
         voto_espectadores: voto_espectadores,
         fecha: fecha,
-        ganancia:ganancia,
+        ganancia: ganancia,
         link: link
     };
     try {
@@ -98,10 +98,27 @@ async function fetchGetUsersRanking() {
 
 }
 
+
+async function llenarDatosRanking() {
+    let tabla = document.getElementById("tabla").innerHTML
+    let resulto = await fetchGetUsersRanking();
+    console.log(resulto.length)
+    for (let i = 0; i < resulto.length; i++) {
+        tabla += `<tr>
+            <td>${resulto[i].username}</td>
+            <td>${resulto[i].record}</td>
+            </tr>`
+        console.log(tabla)
+    }
+    console.log(tabla)
+    document.getElementById("tabla").innerHTML = tabla;
+}
+llenarDatosRanking()
+
 async function fetchPostInsertUser(username, password) {
     let datos = {
         username: username,
-        password:password
+        password: password
     };
     try {
         response = await fetch(`http://localhost:4000/insertUser`, {
@@ -122,19 +139,23 @@ async function fetchPostInsertUser(username, password) {
 
 async function fetchGetRecordPuntaje(id) {
     try {
-        response = await fetch(`http://localhost:4000/recordPuntaje/id_usuario=${id}`, {
+        response = await fetch(`http://localhost:4000/recordPuntaje?id_usuario=${id}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
             },
         })
         let result = await response.json();
-        console.log(result)
         return result
     } catch (error) {
         alert("Hubo un error: ", error.message)
     }
 
+}
+
+async function llenarDatosPersonal(id_user) {
+    let puntajeJugador = await fetchGetRecordPuntaje(id_user);
+    document.getElementById("puntajePropio").innerText = puntajeJugador[0].record
 }
 
 async function fetchPutRecord(puntaje, id_usuario) {
@@ -157,25 +178,4 @@ async function fetchPutRecord(puntaje, id_usuario) {
         alert("Hubo un error: ", error.message)
 
     }
-
-}
-
-
-async function llenarDatosRanking() {
-    let tabla = document.getElementById("tabla").innerHTML
-    let resulto = await fetchGetUsersRanking();
-    // console.log(resulto)
-    for (let i = 0; i < resulto.length; i++) {
-        tabla += `<tr>
-            <td>${resulto[i].username}</td>
-            <td>${resulto[i].record}</td>
-            </tr>`
-    }
-    console.log(tabla)
-    document.getElementById("tabla").innerHTML = tabla;
-}
-llenarDatosRanking()
-
-async function llenarDatosPersonal(id) {
-    document.getElementById("puntajePropio").innerText = fetchGetRecordPuntaje(id);
 }

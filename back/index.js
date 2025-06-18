@@ -58,7 +58,7 @@ app.get('/usersId', async function (req, res) {
 app.get('/usersRanking', async function (req, res) {
     try {
         let respuesta = await realizarQuery(`SELECT username, record FROM Usuarios ORDER BY record DESC LIMIT 10`);
-        res.send({res: respuesta});
+        res.send(respuesta);
     }
     catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
