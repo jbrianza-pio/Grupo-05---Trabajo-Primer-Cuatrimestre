@@ -79,8 +79,7 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
             let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
         // Parametro recibe el decimo puesto de la tabla (puntaje)
             if(tenPlace<maxPoint){
-                deleteLastMaxPoint()//establecer funcion fetch delete last max puntos 
-                postMaxPoint(id_user,maxPoint)//establecer funcion post max puntos 
+                putPointTabla(id_user,maxPoint)//establecer funcion post max puntos 
                 //parametro dado id del user y puntos maximos
             }
             replaceModalFinal(maxPoint,point)//falta definir variable y UI // DOM

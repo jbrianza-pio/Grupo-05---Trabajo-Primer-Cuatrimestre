@@ -80,6 +80,7 @@ async function fetchGetUsersId(username, password) {
 }
 
 
+
 async function fetchGetUsersRanking() {
     try {
         response = await fetch(`http://localhost:4000/usersRanking`, {
@@ -89,6 +90,7 @@ async function fetchGetUsersRanking() {
             },
         })
         let result = await response.json();
+        // result = result.stringify(JSON)
         return result
     } catch (error) {
         alert("Hubo un error: ", error.message)
@@ -120,7 +122,7 @@ async function fetchPostInsertUser(username, password) {
 
 async function fetchGetRecordPuntaje(id) {
     try {
-        response = await fetch(`http://localhost:4000/usersId?id_usuario=${id}`, {
+        response = await fetch(`http://localhost:4000/recordPuntaje/id_usuario=${id}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -158,3 +160,22 @@ async function fetchPutRecord(puntaje, id_usuario) {
 
 }
 
+
+async function llenarDatosRanking() {
+    let tabla = document.getElementById("tabla").innerHTML
+    let resulto = await fetchGetUsersRanking();
+    // console.log(resulto)
+    for (let i = 0; i < resulto.length; i++) {
+        tabla += `<tr>
+            <td>${resulto[i].username}</td>
+            <td>${resulto[i].record}</td>
+            </tr>`
+    }
+    console.log(tabla)
+    document.getElementById("tabla").innerHTML = tabla;
+}
+llenarDatosRanking()
+
+async function llenarDatosPersonal(id) {
+    document.getElementById("puntajePropio").innerText = fetchGetRecordPuntaje(id);
+}
