@@ -60,11 +60,29 @@ async function fetchBorrarPeliculas(id) {
     }
 }
 
-// Fetchs del trolo de Mati
+// Fetchs de los usuarios
 
-async function fetchGetPeliculas(id, parametro) {
+async function fetchGetUsersId(username, password) {
     try {
-        response = await fetch(`http://localhost:4000/peliculas?number=${id}&parametro=${parametro}`, {
+        response = await fetch(`http://localhost:4000/?username=${username}&password=${password}`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        console.log(result)
+        return result
+    } catch (error) {
+        alert("Hubo un error: ", error.message)
+    }
+
+}
+
+
+async function fetchGetUsersRanking() {
+    try {
+        response = await fetch(`http://localhost:4000/usersRanking`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
