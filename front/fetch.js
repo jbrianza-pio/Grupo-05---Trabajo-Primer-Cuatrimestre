@@ -1,8 +1,6 @@
-/* Ejemplos fetch
-
-async function fetchGetDepartamento() {
+async function fetchGetPeliculas(id, parametro) {
     try {
-        response = await fetch(`http://localhost:4000/departamentos`, {
+        response = await fetch(`http://localhost:4000/peliculas?number=${id}&parametro=${parametro}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -16,68 +14,13 @@ async function fetchGetDepartamento() {
 
 }
 
-async function completarDato() {
+async function fetchPostPeliculas(titulo, voto_espectadores, fecha, ganancia, link) {
     let datos = {
-        id_departamento: getDepartamento() // Obtiene el valor seleccionado
-    };
-    try {
-        response = await fetch(`http://localhost:4000/insertarDepartamento`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datos),
-        });
-        console.log(response);
-        let result = await response.json();
-        console.log(result);
-        alert(result.mensaje);
-    } catch (error) {
-        alert("Hubo un error: ", error.message);
-    }
-}
-
-
-async function borrarDepartamentoDatos() {
-    let datos = {
-        id_departamento: getDepartamento() // Obtiene el valor seleccionado
-    };
-    try {
-        response = await fetch(`http://localhost:4000/borrarDepartamento`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(datos),
-        });
-        console.log(response);
-        let result = await response.json();
-        console.log(result);
-        alert("Se borró");
-    } catch (error) {
-        alert("Hubo un error: ", error.message);
-    }
-} */
-
-async function fetchGetPeliculas() {
-    try {
-        response = await fetch(`http://localhost:4000/departamentos`, {
-            method: "GET", //GET, POST, PUT o DELETE
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        let result = await response.json();
-        return result
-    } catch (error) {
-        alert("Hubo un error: ", error.message)
-    }
-
-}
-
-async function fetchPostPeliculas() {
-    let datos = {
-        //    id_pelicula: // aca va el get correspondiente
+        titulo: titulo,
+        voto_espectadores: voto_espectadores,
+        fecha: fecha,
+        ganancia:ganancia,
+        link: link
     };
     try {
         response = await fetch(`http://localhost:4000/insertarPeliculas`, {
@@ -96,9 +39,9 @@ async function fetchPostPeliculas() {
     }
 }
 
-async function fetchBorrarPeliculas() {
+async function fetchBorrarPeliculas(id) {
     let datos = {
-        //    id_pelicula: // aca va el get correspondiente
+        id_pelicula: id
     };
     try {
         response = await fetch(`http://localhost:4000/borrarPeliculas`, {
@@ -115,4 +58,22 @@ async function fetchBorrarPeliculas() {
     } catch (error) {
         alert("Hubo un error: ", error.message);
     }
+}
+
+// Fetchs del trolo de Mati
+
+async function fetchGetPeliculas(id, parametro) {
+    try {
+        response = await fetch(`http://localhost:4000/peliculas?number=${id}&parametro=${parametro}`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    } catch (error) {
+        alert("Hubo un error: ", error.message)
+    }
+
 }
