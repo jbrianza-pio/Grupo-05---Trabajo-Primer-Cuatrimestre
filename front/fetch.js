@@ -64,7 +64,7 @@ async function fetchBorrarPeliculas(id) {
 
 async function fetchGetUsersId(username, password) {
     try {
-        response = await fetch(`http://localhost:4000/?username=${username}&password=${password}`, {
+        response = await fetch(`http://localhost:4000/usersId?username=${username}&password=${password}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -95,3 +95,66 @@ async function fetchGetUsersRanking() {
     }
 
 }
+
+async function fetchPostInsertUser(username, password) {
+    let datos = {
+        username: username,
+        password:password
+    };
+    try {
+        response = await fetch(`http://localhost:4000/insertUser`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        console.log(response);
+        let result = await response.json();
+        console.log(result);
+        alert(result.mensaje);
+    } catch (error) {
+        alert("Hubo un error: ", error.message);
+    }
+}
+
+async function fetchGetRecordPuntaje(id) {
+    try {
+        response = await fetch(`http://localhost:4000/usersId?id_usuario=${id}`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        console.log(result)
+        return result
+    } catch (error) {
+        alert("Hubo un error: ", error.message)
+    }
+
+}
+
+async function fetchPutRecord(puntaje, id_usuario) {
+    try {
+        let datos = {
+            puntaje: puntaje,
+            id_usuario: id_usuario
+        }
+        response = await fetch(`http://localhost:4000/record`, {
+            method: "PUT", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
+        })
+        let result = await response.json();
+        alert("Se modifico")
+        return result
+    } catch (error) {
+        alert("Hubo un error: ", error.message)
+
+    }
+
+}
+
