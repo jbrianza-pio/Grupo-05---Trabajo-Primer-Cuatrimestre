@@ -18,16 +18,16 @@ app.get('/', function (req, res) {
 });
 
 //Crea un nuevo usuario una vez se checka el login, y devuelve el id. Tener en cuenta que el id lo van a usar para obtener los siguientes pedidos
-app.post('/usersRegistro', async function (req, res) {
+app.post('/insertUser', async function (req, res) {
     try {
         let check = await realizarQuery(`SELECT username FROM Usuarios WHERE username = "${req.body.username}"`);
         if (check.length == 0) {     //Este condicional corrobora que exista algun usuario con ese nombre de usuario
             await realizarQuery(`INSERT INTO Usuarios (username, password, record) VALUES
                 ("${req.body.username}", "${req.body.password}", 0)`)      //Cambiar a nombres de variables que sean el username y la password, el récord por default es 0
             let respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.body.username}"`)  //Pasarle como parámetro el nombre de usuario, de acá en más nos manejaremos con el nombre de usuario
-            res.send(respuesta)
+            res.send({res: respuesta})
         } else {
-            res.send("No se pudo agregar el usuario, ya existe otro con ese nombre")
+            res.send({res: "No se pudo agregar el usuario, ya existe otro con ese nombre"})
         };
     } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message })
@@ -36,17 +36,17 @@ app.post('/usersRegistro', async function (req, res) {
 
 
 //Esta función checkea que primero exista un usuario con ese nombre y luego checkea si la contraseña y el usuario coinciden 
-app.get('/usersLogin', async function (req, res) {
+app.get('/usersId', async function (req, res) {
     try {
         let checkUsuario = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}"`)
         if (checkUsuario.length == 0) {
-            res.send("-1")   //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
+            res.send({res: "-1"})   //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
         } else if (checkUsuario.length > 0) {
             let checkContraseña = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}" AND password = "${req.query.password}"`)
             if (checkContraseña.length == 0) {
-                res.send("0")  //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
+                res.send({res: "0"})  //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
             } else {
-                res.send(checkContraseña)
+                res.send({res: checkContraseña})
             }
         }
     } catch (error) {
