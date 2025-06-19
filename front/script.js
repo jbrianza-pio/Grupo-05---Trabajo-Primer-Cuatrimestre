@@ -90,6 +90,25 @@ function selectRandomPeli(category) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Inicio de sesión
 function register() {
     let check = fetchPostUsuarioRegister(getUser(), getPassword()) //Se necesitaría que en el front se diseñe una función que reciba el usuario y la contraseña
