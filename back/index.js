@@ -25,9 +25,9 @@ app.post('/insertUser', async function (req, res) {
             await realizarQuery(`INSERT INTO Usuarios (username, password, record) VALUES
                 ("${req.body.username}", "${req.body.password}", 0)`)      //Cambiar a nombres de variables que sean el username y la password, el récord por default es 0
             let respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.body.username}"`)  //Pasarle como parámetro el nombre de usuario, de acá en más nos manejaremos con el nombre de usuario
-            res.send({res: respuesta})
+            res.send({ res: respuesta })
         } else {
-            res.send({res: "No se pudo agregar el usuario, ya existe otro con ese nombre"})
+            res.send({ res: "No se pudo agregar el usuario, ya existe otro con ese nombre" })
         };
     } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message })
@@ -40,13 +40,13 @@ app.get('/usersId', async function (req, res) {
     try {
         let checkUsuario = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}"`)
         if (checkUsuario.length == 0) {
-            res.send({res: "-1"})   //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
+            res.send({ res: "-1" })   //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
         } else if (checkUsuario.length > 0) {
             let checkContraseña = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}" AND password = "${req.query.password}"`)
             if (checkContraseña.length == 0) {
-                res.send({res: "0"})  //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
+                res.send({ res: "0" })  //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
             } else {
-                res.send({res: checkContraseña})
+                res.send({ res: checkContraseña })
             }
         }
     } catch (error) {
@@ -78,9 +78,8 @@ app.get('/usersRanking', async function (req, res) {
 app.get('/peliculas', async function (req, res) {
     try {
         let parametro = req.query.parametro
-
         let respuesta;
-        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id}`);
+        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id_pelicula}`);
         res.send(respuesta)
     } catch (error) {
         res.send(error)
@@ -89,22 +88,22 @@ app.get('/peliculas', async function (req, res) {
 });
 
 app.delete('/borrarPeliculas', async function (req, res) {
-   try {
-    await realizarQuery(`
-        DELETE FROM Peliculas WHERE id_pelicula = '${req.body.id}'`)
-    res.send("Se elimino correctamente")
-   } catch (error) {
+    try {
+        await realizarQuery(`
+        DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+        res.send({mensaje: "Se elimino correctamente"})
+    } catch (error) {
         res.send(error)
-   }
+    }
 
 })
 
 app.post('/insertarPeliculas', async function (req, res) {
     try {
-        let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND voto_espectadores = "${req.body.voto_espectadores}"  AND fecha = "${req.body.fecha}" AND ganancia = "${req.body.ganancia} AND link = "${req.body.link}`)
+        let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND voto_espectadores = ${req.body.voto_espectadores} AND ganancia = ${req.body.ganancia} AND link = "${req.body.link}" AND año =${req.body.año}`)
         if (check.length == 0) {
-            await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, fecha, ganancia, link )
-                VALUES ("${req.body.titulo}", "${req.body.voto_espectadores}", "${req.body.fecha}", "${req.body.ganancia}", "${req.body.link}");`)
+            await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, ganancia, link, año )
+                VALUES ("${req.body.titulo}", ${req.body.voto_espectadores}, ${req.body.ganancia}, "${req.body.link}", ${req.body.año});`)
             res.send({ mensaje: "Pelicula agregada correctamente" });
         }
         else {
@@ -134,7 +133,7 @@ app.put('/record', async function (req, res) {
         if (check.length == 0) {      //Este condicional corrobora que el récord sea mayor que el puntaje
             await realizarQuery(`UPDATE Usuarios SET record = ${req.body.puntaje} WHERE id_usuario = ${req.body.id_usuario}`);   //A través del id de usuario identifica qué record debe cambiar
             res.send("Record cambiado")
-        } else{
+        } else {
             res.send("El puntaje no es mayor que el record")
         }
     } catch (error) {

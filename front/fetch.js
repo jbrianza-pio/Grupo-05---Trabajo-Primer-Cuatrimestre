@@ -1,6 +1,6 @@
-async function fetchGetPeliculas(id, parametro) {
+async function fetchGetPeliculas(id_pelicula, parametro) {
     try {
-        response = await fetch(`http://localhost:4000/peliculas?number=${id}&parametro=${parametro}`, {
+        response = await fetch(`http://localhost:4000/peliculas?id_pelicula=${id_pelicula}&parametro=${parametro}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -14,11 +14,11 @@ async function fetchGetPeliculas(id, parametro) {
 
 }
 
-async function fetchPostPeliculas(titulo, voto_espectadores, fecha, ganancia, link) {
+async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, link) {
     let datos = {
         titulo: titulo,
         voto_espectadores: voto_espectadores,
-        fecha: fecha,
+        año: año,
         ganancia: ganancia,
         link: link
     };
@@ -39,9 +39,9 @@ async function fetchPostPeliculas(titulo, voto_espectadores, fecha, ganancia, li
     }
 }
 
-async function fetchBorrarPeliculas(id) {
+async function fetchBorrarPeliculas(id_pelicula) {
     let datos = {
-        id_pelicula: id
+        id_pelicula: id_pelicula
     };
     try {
         response = await fetch(`http://localhost:4000/borrarPeliculas`, {
@@ -90,7 +90,6 @@ async function fetchGetUsersRanking() {
             },
         })
         let result = await response.json();
-        // result = result.stringify(JSON)
         return result
     } catch (error) {
         alert("Hubo un error: ", error.message)
@@ -102,15 +101,12 @@ async function fetchGetUsersRanking() {
 async function llenarDatosRanking() {
     let tabla = document.getElementById("tabla").innerHTML
     let resulto = await fetchGetUsersRanking();
-    console.log(resulto.length)
     for (let i = 0; i < resulto.length; i++) {
         tabla += `<tr>
             <td>${resulto[i].username}</td>
             <td>${resulto[i].record}</td>
             </tr>`
-        console.log(tabla)
     }
-    console.log(tabla)
     document.getElementById("tabla").innerHTML = tabla;
 }
 llenarDatosRanking()
@@ -153,7 +149,7 @@ async function fetchGetRecordPuntaje(id) {
 
 }
 
-async function llenarDatosPersonal(id_user) {
+async function llenarDatosPersonal(id_user) {   //Recibe el id de usuario del jugador logueado
     let puntajeJugador = await fetchGetRecordPuntaje(id_user);
     document.getElementById("puntajePropio").innerText = puntajeJugador[0].record
 }
