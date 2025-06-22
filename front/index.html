@@ -2,11 +2,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MovieMasterIndex</title>
 </head>
 <body>
-    
-
+    <h1>MOVIE MASTER</h1>
+    <section id = "paginaPrincipal">
+        <button onclick="showModalCuenta()"><h2>CUENTA</h2></button>
+        <button onclick="showModalPlay()"><h2>JUGAR</h2></button>
+        <button onclick="showModalRanking()"><h2>RANKING</h2></button>
+    </section>
+    <dialog id = "modalSesion1">
+        <h2>CUENTA</h2>
+        <button onclick="closeModalCuenta1()">X</button>
+        <div>
+            <h3>REGISTRARSE</h3>
+            <button onclick="FF()">PRESIONAME</button>
+        </div>
+        <div>
+            <h3>LOGUEAR</h3>
+            <button onclick="FF()">PRESIONAME</button>
+        </div>
+        <div>
+            <input id="inputUser">USERNAME</input>
+            <input id="inputPassword">PASSWORD</input>
+        </div>
+    </dialog>
+    <dialog id = "modalSesion2">
+        <h2>CUENTA</h2>
+        <button onclick="closeModalCuenta2()">X</button>
+        <div>
+            <h3>CUENTA LOGUEADA</h3>
+        </div>
+        <div>
+            <h3 >CERRAR SESIÓN</h3>
+            <button onclick="FF()">PRESIONAME</button>
+        </div>
+    </dialog>
+    <dialog id = "modalJugar">
+        <h2>JUGAR</h2>
+        <button onclick="closeModalPlay()">X</button>
+        <p>ELIGE CATEGORÍA</p>
+        <div>
+            <button onclick="changeGame('taquilla')">TAQUILLA</button>
+            <button onclick="changeGame('valoracion')">VALORACIÓN</button>
+            <button onclick="changeGame('fecha')">FECHA</button>
+        </div>
+    </dialog>
+    <dialog id = "modalRanking">
+        <h2>RANKING</h2>
+        <button onclick="closeModalRanking()">X</button>
+        <table id="tabla">
+            <tr>
+                <th>
+                    Nombre de usuario
+                </th>
+                <th>
+                    Ranking
+                </th>
+            </tr>
+        </table>
+        <div>
+            <h3>PUNTAJE MAXIMO</h3>
+            <h3 id = "puntajePropio">X</h3>
+        </div>
+    </dialog>
     <script src="dom.js"></script>
     <script src="fetch.js"></script>
     <script src="script.js"></script>
