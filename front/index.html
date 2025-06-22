@@ -7,50 +7,50 @@
 <body>
     <h1>MOVIE MASTER</h1>
     <section id = "paginaPrincipal">
-        <h2>CUENTA</h2>
-        <h2>JUGAR</h2>
-        <h2>RANKING</h2>
+        <button onclick="showModalCuenta()"><h2>CUENTA</h2></button>
+        <button onclick="showModalPlay()"><h2>JUGAR</h2></button>
+        <button onclick="showModalRanking()"><h2>RANKING</h2></button>
     </section>
     <dialog id = "modalSesion1">
         <h2>CUENTA</h2>
-        <button>X</button>
+        <button onclick="closeModalCuenta1()">X</button>
         <div>
             <h3>REGISTRARSE</h3>
-            <button>PRESIONAME</button>
+            <button onclick="FF()">PRESIONAME</button>
         </div>
         <div>
             <h3>LOGUEAR</h3>
-            <button>PRESIONAME</button>
+            <button onclick="FF()">PRESIONAME</button>
         </div>
         <div>
-            <h4>USERNAME</h4>
-            <h4>PASSWORD</h4>
+            <input id="inputUser">USERNAME</input>
+            <input id="inputPassword">PASSWORD</input>
         </div>
     </dialog>
     <dialog id = "modalSesion2">
         <h2>CUENTA</h2>
-        <button>X</button>
+        <button onclick="closeModalCuenta2()">X</button>
         <div>
             <h3>CUENTA LOGUEADA</h3>
-            <button>PRESIONAME</button>
         </div>
         <div>
-            <h3>CERRAR SESIÓN</h3>
-            <button>PRESIONAME</button>
+            <h3 >CERRAR SESIÓN</h3>
+            <button onclick="FF()">PRESIONAME</button>
         </div>
     </dialog>
     <dialog id = "modalJugar">
         <h2>JUGAR</h2>
-        <button>X</button>
+        <button onclick="closeModalPlay()">X</button>
         <p>ELIGE CATEGORÍA</p>
         <div>
-            <button onclick="FF(this)">TAQUILLA</button>
-            <button onclick="FF(this)">VALORACIÓN</button>
-            <button onclick="FF(this)">FECHA</button>
+            <button onclick="changeGame('taquilla')">TAQUILLA</button>
+            <button onclick="changeGame('valoracion')">VALORACIÓN</button>
+            <button onclick="changeGame('fecha')">FECHA</button>
         </div>
     </dialog>
-    <!-- <dialog id = "modalRanking"> -->
+    <dialog id = "modalRanking">
         <h2>RANKING</h2>
+        <button onclick="closeModalRanking()">X</button>
         <table id="tabla">
             <tr>
                 <th>
@@ -65,7 +65,7 @@
             <h3>PUNTAJE MAXIMO</h3>
             <h3 id = "puntajePropio">X</h3>
         </div>
-    <!-- </dialog> -->
+    </dialog>
     <script src="dom.js"></script>
     <script src="fetch.js"></script>
     <script src="script.js"></script>

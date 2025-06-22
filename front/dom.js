@@ -11,59 +11,64 @@ function getPassword(){
 
 // dom modals
 
-//const modalid = document.getElementById("modal-name")//encuentra con el modalid el elemento //Accder al elemento
-//const modalid = document.getElementById("modal-name")//encuentra con el modalid el elemento//Accder al elemento
-//const modalid = document.getElementById("modal-name")//encuentra con el modalid el elemento//Accder al elemento
-//const modalid = document.getElementById("modal-name")//encuentra con el modalid el elemento//Accder al elemento
-//const modalid = document.getElementById("modal-name")//encuentra con el modalid el elemento//Accder al elemento
+const modalJugar = document.getElementById("modalJugar")//encuentra con el modalid el elemento //Accder al elemento
+const modalRanking = document.getElementById("modalRanking")//encuentra con el modalid el elemento//Accder al elemento
+const modalSesion1 = document.getElementById("modalSesion1")//encuentra con el modalid el elemento//Accder al elemento
+const modalSesion2 = document.getElementById("modalSesion2")//encuentra con el modalid el elemento//Accder al elemento
+const modalFinal = document.getElementById("modalFinal")//encuentra con el modalid el elemento//Accder al elemento
 
 //modal cuenta1
-
-function showModalCuenta1(){ //agregarle el nombre
-    //modalid.showModal()
+function showModalCuenta(){
+    if (id_user==-1||id_user==undefined){
+        showModalCuenta1()
+    }else{
+        showModalCuenta2()
+    }
 }
-function closeModalCuenta1(){//agregarle el nombre
-    //modalid.close()
+function showModalCuenta1(){ 
+    modalSesion1.showModal()
 }
-
-
+function closeModalCuenta1(){
+    modalSesion1.close()
+}
 //modal cuenta2
-function showModalCuenta2(){ //agregarle el nombre
-    //modalid.showModal()
+function showModalCuenta2(){ 
+    modalSesion2.showModal()
 }
-function closeModalCuenta2(){//agregarle el nombre
-    //modalid.close()
+function closeModalCuenta2(){
+    modalSesion2.close()
 }
 
 
 //modal ranking
-function showModalRanking(){ //agregarle el nombre
-    //modalid.showModal()
+function showModalRanking(){ 
+    modalRanking.showModal()
 }
-function closeModalRanking(){//agregarle el nombre
-    //modalid.close()
+function closeModalRanking(){
+    modalRanking.close()
 }
 
-
-//modal jugar
-function showModalPlay(){ //agregarle el nombre
-    //modalid.showModal()
+// MODAL JUGAR
+function showModalPlay(){
+    modalJugar.showModal()
 }
-function closeModalPlay(){//agregarle el nombre
-    //modalid.close()
+function closeModalPlay(){
+    modalJugar.close()
 }
 
 
 
 //modal Final
-function replaceModalFinal(maxPoint,point){
-    //igualar las diferentes partes del modal a las partes del array
+function replaceandshowModalFinal(maxPoint,point){
+    document.getElementById("pointModalFinal").textContent = point
+    document.getElementById("maxpointModalFinal").textContent = maxPoint
+    showModalFinal()
 }
-function showModalFinal(){ //agregarle el nombre
-    //modalid.showModal()
+function showModalFinal(){ 
+    modalFinal.showModal()
 }
-function closeModalFinal(){//agregarle el nombre
-    //modalid.close()
+function closeModalFinal(){
+    modalFinal.close()
 }
 
 // dom index
@@ -72,8 +77,18 @@ function changeScreen(){
 }
 
 function replaceSec1(peliculaSec1){
-    //igualar las diferentes partes de la seccion a las partes del array
+    document.getElementsByClassName("namePeli1").textContent=peliculaSec1[0]
+    //modificar imagen de fondo css
 }
 function replaceSec2(peliculaSec2){
-        //igualar las diferentes partes de la seccion a las partes del array
+    document.getElementsByClassName("namePeliw").textContent=peliculaSec2[0]
+    //modificar imagen de fondo css
 }
+
+// TESTEO DE COMO DEBE FUNCIONAR PARA REEMPLAZAR TEXTO EN DOM. 
+// FUNCIONA CUANDO ELMODAL NO ESTA VISIBLE
+// function mod(){
+//     let mod=document.getElementById("a").textContent
+//     mod ="a"
+//     document.getElementById("a").textContent=mod
+// }
