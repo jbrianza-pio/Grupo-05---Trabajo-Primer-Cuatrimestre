@@ -47,7 +47,12 @@ function changeGame(buttonparametro){
     parametro = buttonparametro
     console.log(parametro)
     changeScreen()//falta hacer ui y DOM
-    seleccionIncial(parametro)
+    seleccionIncial()
+}
+//prepara el juego devuelta
+function playAgain(){
+    seleccionIncial()
+    closeModalFinal()
 }
 
 ///////////////////////////////////////////////////////
@@ -77,14 +82,15 @@ function buttonAnswer(selecctionAnswer){//hacer llegar el atributo del boton
             maxPoint=point
             fetchPutRecord(id_user,maxPoint)
         // Parametro dado ID de user y puntos max.
-            let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
-        // Parametro recibe el decimo puesto de la tabla (puntaje)
-            if(tenPlace<maxPoint){
-                putPointTabla(id_user,maxPoint)//establecer funcion post max puntos 
-                //parametro dado id del user y puntos maximos
-            }
-            replaceandshowModalFinal(maxPoint,point)
         }
+        let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
+    // Parametro recibe el decimo puesto de la tabla (puntaje)
+        if(tenPlace<maxPoint){
+            putPointTabla(id_user,maxPoint)//establecer funcion post max puntos 
+            //parametro dado id del user y puntos maximos
+        }
+        replaceandshowModalFinal(maxPoint,point)
+        
     }
 }
 
@@ -97,22 +103,22 @@ function replaceSelection(){
 }
   //Inicio de sesión
 function register() {
-    let check = fetchPostUsuarioRegister(getUser(), getPassword()) //Se necesitaría que en el front se diseñe una función que reciba el usuario y la contraseña
+    let check = fetchPostInsertUser(getUser(), getPassword()) 
     if (check == "No se pudo agregar el usuario, ya existe otro con ese nombre") {
-        showModal("Error", "Ese usuario ya existe, ingrese uno nuevo")
+        alert("Error. Ese usuario ya existe, ingrese uno nuevo")
     } else if(check > 0){
         login()
     }
 }
 
 function login(){
-    let check = fetchGetUsuarioLogin(getUser(), getPassword()) //Lo mismo que con el register, que la función reciba los parámetros y los compare
+    let check = fetchGetUsersId(getUser(), getPassword()) 
     if (check > 0){
         changeScreen()
     } else if(check == 0){ //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
-        showModal("Error", "No se ha ingresado correctamente la contraseña")
+        alert("Error. No se ha ingresado correctamente la contraseña")
     } else if(check == -1){
-        showModal("Error", "El usuario ingresado no existe")
+        alert("Error. El usuario ingresado no existe")
     }
 
 }

@@ -14,17 +14,17 @@
             <img>
         </div>
         <div>
-            <h2 class="namePeli1">NOMBRE PELICULA 2</h2>
+            <h2 class="namePeli2">NOMBRE PELICULA 2</h2>
         </div>
         <div>
-            <h3 class="namePeli2">NOMBRE PELICULA 1</h3>
+            <button onclick="buttonAnswer(peliculaSec1)"><h3 class="namePeli1">NOMBRE PELICULA 1</h3></button>
         </div>
         <div>  
             <p>PUNTOS</p>
             <p>VS</p>
         </div>
         <div>
-            <h3 class="namePeli2">NOMBRE PELICULA 2</h3>
+            <button onclick="buttonAnswer(peliculaSec2)"><h3 class="namePeli2">NOMBRE PELICULA 2</h3></button>
         </div>
     </section>
     <dialog id="modalFinal">
@@ -38,8 +38,8 @@
             <p id="maxpointModalFinal">X</p>
         </div>
         <div>
-            <button onclick="FF()">Volver al inicio</button>
-            <button onclick="FF()">Volver a jugar</button>
+            <button onclick="changeScreen()">Volver al inicio</button>
+            <button onclick="playAgain()">Volver a jugar</button>
         </div>
     </dialog>
     <script src="dom.js"></script>
