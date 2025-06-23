@@ -79,11 +79,13 @@ function changeScreen(){
 }
 
 function replaceSec1(peliculaSec1){
-    document.getElementsByClassName("namePeli1").textContent=peliculaSec1[0]
+    document.getElementsByClassName("namePeli1")[0].textContent=peliculaSec1[0]
+    document.getElementsByClassName("namePeli1")[1].textContent=peliculaSec1[0]
     //modificar imagen de fondo css
 }
 function replaceSec2(peliculaSec2){
-    document.getElementsByClassName("namePeliw").textContent=peliculaSec2[0]
+    document.getElementsByClassName("namePeli1")[0].textContent=peliculaSec2[0]
+    document.getElementsByClassName("namePeli1")[1].textContent=peliculaSec2[0]
     //modificar imagen de fondo css
 }
 

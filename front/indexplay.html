@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMasterIndex</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <h1>MOVIE MASTER</h1>
@@ -27,16 +28,15 @@
             <button onclick="buttonAnswer(peliculaSec2)"><h3 class="namePeli2">NOMBRE PELICULA 2</h3></button>
         </div>
     </section>
-    <dialog id="modalFinal">
+    <dialog id="modalFinal"  class="modal">
         <h2>PERDISTE</h2>
-        <div>
-            <h3>PUNTUACION</h3>
-            <p id="pointModalFinal">X</p>
-        </div>
-        <div>
-            <h3>PUNTUACION MAXIMA</h3>
-            <p id="maxpointModalFinal">X</p>
-        </div>
+            <div class="redPart">
+                <h3>PUNTUACION</h3>
+                <p id="pointModalFinal">X</p>
+            </div><div class="purplePart" >
+                <h3>PUNTUACION MAXIMA</h3>
+                <p id="maxpointModalFinal">X</p>
+            </div>  
         <div>
             <button onclick="changeScreen()">Volver al inicio</button>
             <button onclick="playAgain()">Volver a jugar</button>
