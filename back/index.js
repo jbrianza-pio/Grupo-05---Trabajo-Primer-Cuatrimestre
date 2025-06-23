@@ -24,7 +24,7 @@ app.post('/insertUser', async function (req, res) {
         if (check.length == 0) {     //Este condicional corrobora que exista algun usuario con ese nombre de usuario
             await realizarQuery(`INSERT INTO Usuarios (username, password, record) VALUES
                 ("${req.body.username}", "${req.body.password}", 0)`)      //Cambiar a nombres de variables que sean el username y la password, el récord por default es 0
-            let respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.body.username}"`)  //Pasarle como parámetro el nombre de usuario, de acá en más nos manejaremos con el nombre de usuario
+            let respuesta = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.body.username}"`)  //Pasarle como parámetro el nombre de usuario, de acá en más nos manejaremos con el id de usuario
             res.send({ res: respuesta })
         } else {
             res.send({ res: "No se pudo agregar el usuario, ya existe otro con ese nombre" })
@@ -145,6 +145,6 @@ app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
 
-//Para cambiar el auto-increment del SQL si se generan usuarios que de prueba:
+//Para cambiar el auto-increment del SQL si se generan usuarios de prueba:
 //ALTER TABLE Usuarios AUTO_INCREMENT = 1
 

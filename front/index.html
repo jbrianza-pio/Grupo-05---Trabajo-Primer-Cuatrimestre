@@ -36,7 +36,7 @@
         </div>
         <div>
             <h3 >CERRAR SESIÓN</h3>
-            <button onclick="FF()">PRESIONAME</button>
+            <button onclick="closeAccount()">PRESIONAME</button>
         </div>
     </dialog>
     <dialog id = "modalJugar">
@@ -44,9 +44,9 @@
         <button onclick="closeModalPlay()">X</button>
         <p>ELIGE CATEGORÍA</p>
         <div>
-            <button onclick="changeGame('taquilla')">TAQUILLA</button>
-            <button onclick="changeGame('valoracion')">VALORACIÓN</button>
-            <button onclick="changeGame('fecha')">FECHA</button>
+            <button onclick="changeGame('ganancia')">TAQUILLA</button>
+            <button onclick="changeGame('voto_espectadores')">VALORACIÓN</button>
+            <button onclick="changeGame('año')">FECHA</button>
         </div>
     </dialog>
     <dialog id = "modalRanking">
@@ -64,7 +64,7 @@
         </table>
         <div>
             <h3>PUNTAJE MAXIMO</h3>
-            <h3 id = "puntajePropio">X</h3>
+            <h3 id = "puntajePropio">Inicia sesión para ver tu puntaje máximo</h3>
         </div>
     </dialog>
     <script src="dom.js"></script>
