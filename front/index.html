@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMasterIndex</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <h1>MOVIE MASTER</h1>
@@ -11,47 +12,55 @@
         <button onclick="showModalPlay()"><h2>JUGAR</h2></button>
         <button onclick="showModalRanking()"><h2>RANKING</h2></button>
     </section>
-    <dialog id = "modalSesion1">
+    <dialog id="modalSesion1" class="modal">
+        <button class="closeButton" onclick="closeModalCuenta1()">X</button>
         <h2>CUENTA</h2>
-        <button onclick="closeModalCuenta1()">X</button>
-        <div>
+        <div class="partesAccion">
+            <div class="purplePart">
             <h3>REGISTRARSE</h3>
-            <button onclick="register()">PRESIONAME</button>
-        </div>
-        <div>
+            <button class="accionBtn" onclick="register()">X</button>
+            </div>
+            <div class="redPart">
             <h3>LOGUEAR</h3>
-            <button onclick="login()">PRESIONAME</button>
+            <button class="accionBtn" onclick="login()">X</button>
+            </div>
         </div>
-        <div>
-            <input id="inputUser">USERNAME</input>
-            <input id="inputPassword">PASSWORD</input>
+        <div class="formulario">
+            <label>USERNAME</label>
+            <input id="inputUser" type="text">
+            <label>PASSWORD</label>
+            <input id="inputPassword" type="password">
         </div>
     </dialog>
-    <dialog id = "modalSesion2">
+
+    <dialog id = "modalSesion2"  class="modal">
+        <button class="closeButton" onclick="closeModalCuenta2()">X</button>
         <h2>CUENTA</h2>
-        <button onclick="closeModalCuenta2()">X</button>
-        <div>
+        <div class="partesAccion">
+
+        <div class="purplePart">
             <h3>CUENTA LOGUEADA</h3>
             <p id="userLogued"></p>
         </div>
-        <div>
+        <div  class="redPart">
             <h3 >CERRAR SESIÓN</h3>
             <button onclick="closeAccount()">PRESIONAME</button>
         </div>
+        </div>
     </dialog>
-    <dialog id = "modalJugar">
+    <dialog id = "modalJugar"  class="modal">
+        <button class="closeButton" onclick="closeModalPlay()">X</button>
         <h2>JUGAR</h2>
-        <button onclick="closeModalPlay()">X</button>
         <p>ELIGE CATEGORÍA</p>
-        <div>
+        <div id="buttonsJugar">
             <button onclick="changeGame('ganancia')">TAQUILLA</button>
             <button onclick="changeGame('voto_espectadores')">VALORACIÓN</button>
             <button onclick="changeGame('año')">FECHA</button>
         </div>
     </dialog>
-    <dialog id = "modalRanking">
+    <dialog id = "modalRanking"  class="modal">
+        <button class="closeButton" onclick="closeModalRanking()">X</button>
         <h2>RANKING</h2>
-        <button onclick="closeModalRanking()">X</button>
         <table id="tabla">
             <tr>
                 <th>
