@@ -173,32 +173,22 @@ app.get('/getPuntajes', async function (req,res) {
 
 
 //POST PUNTAJES
-//ARREGLAR
 app.post('/insertarPuntaje', async function (req, res) {
     try {
-        let check = await realizarQuery(`SELECT * FROM Puntajes WHERE fecha = "${req.body.fecha}" AND puntaje = "${req.body.puntaje}" AND id_usuario = "${req.body.id_usuario}`)
+        const check = await realizarQuery(`SELECT * FROM Puntajes WHERE fecha = "${req.body.fecha}" AND puntaje = "${req.body.puntaje}" AND id_usuario = "${req.body.id_usuario}"`)
+
         if (check.length == 0) {
             await realizarQuery(` INSERT INTO Puntajes (fecha, puntaje, id_usuario)
-                VALUES ("${req.body.fecha}", "${req.body.puntaje}", "${req.body.id_usuario}");`)
+                VALUES ("${req.body.fecha}", "${req.body.puntaje}", "${req.body.id_usuario}"); `)
             res.send({ mensaje: "Puntaje agregado correctamente" });
         }
         else {
             res.send({ mensaje: "Puntaje ya existe" })
         }
-    } catch (error) {
+    } catch(error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 });
-//ARREGLAR
-
-
-
-
-
-
-
-
-
 
 /*PUT PUNTAJES*/
 app.put('/putPuntajes', async function (req, res) {
