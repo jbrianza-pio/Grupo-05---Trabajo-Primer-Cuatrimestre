@@ -9,7 +9,7 @@ async function fetchGetPeliculas(id_pelicula, parametro) {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ", error.message)
+        alert("Hubo un error: ")
     }
 
 }
@@ -35,7 +35,7 @@ async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, lin
         console.log(result);
         alert(result.mensaje);
     } catch (error) {
-        alert("Hubo un error: ", error.message);
+        alert("Hubo un error: ");
     }
 }
 
@@ -56,7 +56,7 @@ async function fetchBorrarPeliculas(id_pelicula) {
         console.log(result);
         alert("Se borró");
     } catch (error) {
-        alert("Hubo un error: ", error.message);
+        alert("Hubo un error: ");
     }
 }
 
@@ -64,7 +64,7 @@ async function fetchBorrarPeliculas(id_pelicula) {
 
 async function fetchGetUsersId(username, password) {
     try {
-        response = await fetch(`http://localhost:4000/usersId?username=${username}&password=${password}`, {
+        response = await fetch(`http://localhost:4000/users?username=${username}&password=${password}`, {
             method: "GET", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",
@@ -72,9 +72,10 @@ async function fetchGetUsersId(username, password) {
         })
         let result = await response.json();
         console.log(result)
-        return result
+        
+        return result.res
     } catch (error) {
-        alert("Hubo un error: ", error.message)
+        alert("Hubo un error: ")
     }
 
 }
@@ -92,7 +93,7 @@ async function fetchGetUsersRanking() {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ", error.message)
+        alert("Hubo un error: ")
     }
 
 }
@@ -124,12 +125,11 @@ async function fetchPostInsertUser(username, password) {
             },
             body: JSON.stringify(datos),
         });
-        console.log(response);
         let result = await response.json();
         console.log(result);
-        alert(result.mensaje);
+        return result
     } catch (error) {
-        alert("Hubo un error: ", error.message);
+        alert("Hubo un error: ");
     }
 }
 
@@ -144,7 +144,7 @@ async function fetchGetRecordPuntaje(id) {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ", error.message)
+        alert("Hubo un error: ")
     }
 
 }
@@ -171,7 +171,7 @@ async function fetchPutRecord(puntaje, id_usuario) {
         alert("Se modifico")
         return result
     } catch (error) {
-        alert("Hubo un error: ", error.message)
+        alert("Hubo un error: ")
 
     }
 }
