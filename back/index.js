@@ -36,13 +36,13 @@ app.post('/insertUser', async function (req, res) {
 
 
 //Esta función checkea que primero exista un usuario con ese nombre y luego checkea si la contraseña y el usuario coinciden 
-app.get('/usersId', async function (req, res) {
+app.get('/users', async function (req, res) {
     try {
-        let checkUsuario = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}"`)
+        let checkUsuario = await realizarQuery(`SELECT * FROM Usuarios WHERE username = "${req.query.username}"`)
         if (checkUsuario.length == 0) {
             res.send({ res: "-1" })   //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
         } else if (checkUsuario.length > 0) {
-            let checkContraseña = await realizarQuery(`SELECT id_usuario FROM Usuarios WHERE username = "${req.query.username}" AND password = "${req.query.password}"`)
+            let checkContraseña = await realizarQuery(`SELECT * FROM Usuarios WHERE username = "${req.query.username}" AND password = "${req.query.password}"`)
             if (checkContraseña.length == 0) {
                 res.send({ res: "0" })  //Importante que hagan un parseInt en el front para cambiarlo a integer, sí funciona bien el register
             } else {

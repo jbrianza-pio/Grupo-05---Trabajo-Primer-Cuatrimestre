@@ -1,5 +1,4 @@
 //DOM generales
-
 function getUser(){
     user = document.getElementById("inputUser").value;
     return user
@@ -20,8 +19,10 @@ const modalFinal = document.getElementById("modalFinal")//encuentra con el modal
 //modal cuenta1
 function showModalCuenta(){
     if (id_user==-1||id_user==undefined){
+        closeModalCuenta2()
         showModalCuenta1()
     }else{
+        closeModalCuenta1()
         showModalCuenta2()
     }
 }
@@ -33,6 +34,7 @@ function closeModalCuenta1(){
 }
 //modal cuenta2
 function showModalCuenta2(){ 
+    document.getElementById("userLogued").textContent=usernameLogued
     modalSesion2.showModal()
 }
 function closeModalCuenta2(){

@@ -1,11 +1,11 @@
 
 //Funciones base
-
 let peliculaSec1
 let peliculaSec2
 let parametro
 let point 
-let id_user
+let id_user = -1
+let usernameLogued
 
 function getRandomInt(){
     let random = Math.floor(Math.random() * 494 );
@@ -102,20 +102,26 @@ function replaceSelection(){
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
 }
   //Inicio de sesión
-function register() {
-    let check = fetchPostInsertUser(getUser(), getPassword()) 
-    if (check == "No se pudo agregar el usuario, ya existe otro con ese nombre") {
-        alert("Error. Ese usuario ya existe, ingrese uno nuevo")
-    } else if(check > 0){
+async function register() {
+    let check = await fetchPostInsertUser(getUser(), getPassword()) 
+    console.log(check[0])
+    if(check[0].id_usuario >  0){
         login()
+    }else {
+        alert("Error. Ese usuario ya existe, ingrese uno nuevo")
     }
 }
 
-function login(){
-    let check = fetchGetUsersId(getUser(), getPassword()) 
-    if (check > 0){
+async function login(){
+    let check = await fetchGetUsersId(getUser(), getPassword()) 
+    if (check[0].id_usuario >  0){
+        usernameLogued=check[0].username
+        id_user=check[0].id_usuario
+        console.log(check[0].username)
+        alert("Iniciando sesion")
+        showModalCuenta()
         changeScreen()
-    } else if(check == 0){ //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
+    } else if(check == "0"){ //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
         alert("Error. No se ha ingresado correctamente la contraseña")
     } else if(check == -1){
         alert("Error. El usuario ingresado no existe")
