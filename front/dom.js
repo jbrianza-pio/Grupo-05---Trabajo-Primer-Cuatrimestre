@@ -75,7 +75,12 @@ function closeModalFinal(){
 
 // dom index
 function changeScreen(){
-    //investigar
+    let actual = window.location.pathname;
+    if (actual.includes("index.html")) {
+        window.location.replace("indexplay.html")
+    } else {
+        window.location.replace("index.html")
+    }
 }
 
 function replaceSec1(peliculaSec1){
@@ -88,11 +93,3 @@ function replaceSec2(peliculaSec2){
     document.getElementsByClassName("namePeli1")[1].textContent=peliculaSec2[0]
     //modificar imagen de fondo css
 }
-
-// TESTEO DE COMO DEBE FUNCIONAR PARA REEMPLAZAR TEXTO EN DOM. 
-// FUNCIONA CUANDO ELMODAL NO ESTA VISIBLE
-// function mod(){
-//     let mod=document.getElementById("a").textContent
-//     mod ="a"
-//     document.getElementById("a").textContent=mod
-// }
