@@ -75,11 +75,14 @@ function closeModalFinal(){
 
 // dom index
 function changeScreen(){
-    let actual = window.location.pathname;
-    if (actual.includes("index.html")) {
-        window.location.replace("indexplay.html")
+    if (menu!=0) {
+        document.getElementById("playPart").style.display = 'contents'
+        document.getElementById("mainMenu").style.display = 'none'
+        menu=0
     } else {
-        window.location.replace("index.html")
+        document.getElementById("mainMenu").style.display = 'contents'
+        document.getElementById("playPart").style.display = 'none'
+        menu=1
     }
 }
 
@@ -89,7 +92,7 @@ function replaceSec1(peliculaSec1){
     //modificar imagen de fondo css
 }
 function replaceSec2(peliculaSec2){
-    document.getElementsByClassName("namePeli1")[0].textContent=peliculaSec2[0]
-    document.getElementsByClassName("namePeli1")[1].textContent=peliculaSec2[0]
+    document.getElementsByClassName("namePeli2")[0].textContent=peliculaSec2[0]
+    document.getElementsByClassName("namePeli2")[1].textContent=peliculaSec2[0]
     //modificar imagen de fondo css
 }

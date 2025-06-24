@@ -172,3 +172,7 @@
         min-width: 60px;
     }
 }
+
+#playPart{
+    display: none;
+}

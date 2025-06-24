@@ -6,6 +6,7 @@ let parametro
 let point
 let id_user = -1
 let usernameLogued
+let menu = -1
 
 function getRandomInt() {
     let random = Math.floor(Math.random() * 494);
@@ -46,8 +47,8 @@ function seleccionIncial() {
 function changeGame(buttonparametro) {
     parametro = buttonparametro
     console.log(parametro)
-    changeScreen()//falta hacer ui y DOM
     seleccionIncial()
+    changeScreen()//falta hacer ui y DOM
 }
 //prepara el juego devuelta
 function playAgain() {
