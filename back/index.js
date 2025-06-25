@@ -154,8 +154,8 @@ app.listen(port, () => {
 /*------------------------------------------------------------------------------------------*/
 
 
-/*GET PUNTAJES*/
-app.get('/getPuntajes', async function (req,res) {
+//GET PUNTAJES
+app.get('/getPuntaje', async function (req,res) {
     try {
         let respuesta = await realizarQuery(`SELECT * FROM Puntajes ORDER BY puntaje`);
         res.send(respuesta);
@@ -164,13 +164,6 @@ app.get('/getPuntajes', async function (req,res) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 })
-
-
-
-
-
-
-
 
 //POST PUNTAJES
 app.post('/insertarPuntaje', async function (req, res) {
@@ -190,25 +183,28 @@ app.post('/insertarPuntaje', async function (req, res) {
     }
 });
 
-/*PUT PUNTAJES*/
-app.put('/putPuntajes', async function (req, res) {
+//PUT PUNTAJES
+app.put('/modificarPuntaje', async function (req, res) {
     try{
         await realizarQuery(`UPDATE Puntajes SET
         puntaje='${req.body.puntaje}' WHERE id_puntaje='${req.body.id_puntaje}'`);
+        res.send({ mensaje: "Puntaje modificado correctamente" });
     }catch(error){
         res.send({mensaje: "Tuviste un error", error: error.message})}
 })
 
-/*DELETE PUNTAJES*/
-app.delete('/borrarPuntajes', function (req, res) {
+//DELETE PUNTAJES
+app.delete('/borrarPuntaje', function (req, res) {
     try{
-    realizarQuery(`
-        DELETE FROM Puntajes WHERE id_puntaje = '${req.body.id_puntaje}'`)
-    }catch(error){res.send({mensaje: "Tuviste un error", error: error.message})}
+    realizarQuery(`DELETE FROM Puntajes WHERE id_puntaje = '${req.body.id_puntaje}'`)
+        res.send({ mensaje: "Puntaje borrado correctamente" });
+    }catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
 })
 
-/*GET DÉCIMO PUNTAJE*/
-app.get('/getLastMaxPoint', async function (req,res) {
+//GET DÉCIMO PUNTAJE
+app.get('/getLastMaxPoint', async function (res) {
     try {
         let respuesta = await realizarQuery(`select puntaje from Puntajes order by puntaje limit 1`);
         res.send(respuesta);
