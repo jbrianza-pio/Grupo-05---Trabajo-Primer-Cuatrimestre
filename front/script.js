@@ -48,6 +48,7 @@ async function seleccionIncial() {
 async function changeGame(buttonparametro) {
     parametro = buttonparametro
     console.log(parametro)
+    closeModalPlay()
     await seleccionIncial()
     changeScreen()
 }
@@ -76,41 +77,52 @@ function buttonAnswer2() {
 }
 
 async function answer(selecctionAnswer) {//hacer llegar el atributo del boton
-    console.log("a")
-    if (peliculaSec1.parametro > peliculaSec2.parametro) {
+    console.log("selecctionAnswer")
+    console.log(selecctionAnswer)
+    console.log("peliculaSec1[0].parametro:")
+    console.log(peliculaSec1[0].parametro)
+    console.log("peliculaSec2[0].parametro:")
+    console.log(peliculaSec2[0].parametro)
+
+    if (peliculaSec1[0].parametro > peliculaSec2[0].parametro) {
+        console.log("1")
         correctAnswer = peliculaSec1
-    } if (peliculaSec2.parametro > peliculaSec1.parametro) {
-        correctAnswer = peliculaSec1
+    } else if (peliculaSec1[0].parametro < peliculaSec2[0].parametro) {
+        console.log("2")
+        correctAnswer = peliculaSec2
     } else {
+        console.log("igual")
         correctAnswer = "igual"
     }
     if (selecctionAnswer == correctAnswer || correctAnswer == "igual") {
+        console.log("correcto")
         point++
         await replaceSelection()
     } else {
-        let maxPoint = fetchGetRecordPuntaje(id_user)
-        // Parametro dado ID de user. Parametro a espera Max Points
-        if (maxPoint < point) {
-            maxPoint = point
-            await fetchPutRecord(id_user, maxPoint)
-            // Parametro dado ID de user y puntos max.
-        }
-        let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
-        // Parametro recibe el decimo puesto de la tabla (puntaje)
-        if (tenPlace < maxPoint) {
-            await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
-            //parametro dado id del user y puntos maximos
-        }
-        await replaceandshowModalFinal(maxPoint, point)
-
+        console.log("incorrecto")
+            // let maxPoint = fetchGetRecordPuntaje(id_user)
+            // // Parametro dado ID de user. Parametro a espera Max Points
+            // if (maxPoint < point) {
+            //     maxPoint = point
+            //     await fetchPutRecord(id_user, maxPoint)
+            //     // Parametro dado ID de user y puntos max.
+            // }
+            // let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
+            // // Parametro recibe el decimo puesto de la tabla (puntaje)
+            // if (tenPlace < maxPoint) {
+            //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
+            //     //parametro dado id del user y puntos maximos
+            // }
+        // await replaceandshowModalFinal(maxPoint, point)
+        showModalFinal()
     }
 }
 
 //cambia de posicion y busca nueva peli
-function replaceSelection() {
+async function replaceSelection() {
     peliculaSec1 = peliculaSec2
     replaceSec1(peliculaSec1); //falta definir variable y UI // DOM
-    peliculaSec2 = selectRandomPeli(parametro);
+    peliculaSec2 = await selectRandomPeli(parametro);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
 }
 //Inicio de sesión

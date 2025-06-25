@@ -80,6 +80,7 @@ function changeScreen(){
         document.getElementById("mainMenu").style.display = 'none'
         menu=0
     } else {
+        closeModalFinal()
         document.getElementById("mainMenu").style.display = ''
         document.getElementById("playPart").style.display = 'none'
         menu=1
