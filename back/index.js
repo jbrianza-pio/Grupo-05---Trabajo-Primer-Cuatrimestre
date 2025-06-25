@@ -79,7 +79,7 @@ app.get('/peliculas', async function (req, res) {
     try {
         let parametro = req.query.parametro
         let respuesta;
-        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id_pelicula}`);
+        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} AS parametro FROM Peliculas WHERE id_pelicula=${req.query.id_pelicula}`);
         res.send(respuesta)
     } catch (error) {
         res.send(error)
@@ -91,7 +91,7 @@ app.delete('/borrarPeliculas', async function (req, res) {
     try {
         await realizarQuery(`
         DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-        res.send({mensaje: "Se elimino correctamente"})
+        res.send({ mensaje: "Se elimino correctamente" })
     } catch (error) {
         res.send(error)
     }

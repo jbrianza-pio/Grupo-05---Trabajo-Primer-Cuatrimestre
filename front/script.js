@@ -12,14 +12,15 @@ function getRandomInt() {
     let random = Math.floor(Math.random() * 494);
     return random
 }
-function selectRandomPeli(parametro) {
+async function selectRandomPeli(parametro) {
     let good = 0;
     while (good < 2) {
         let id = getRandomInt();
-        let selection = fetchGetPeliculas(id, parametro);
+        let selection = await fetchGetPeliculas(id, parametro);
         console.log(selection)
         // Parametro dado ID y parametro a seleccionar.Parametro a espera TITLE, IMAGE_URL Y numero de categoria
         if (selection.length != 3) {
+            console.log("a")
             return selection
         }
         good++
@@ -35,24 +36,25 @@ function selectRandomPeli(parametro) {
 //seccion inicio
 
 // elige y pone las peliculas iniciales
-function seleccionIncial() {
+async function seleccionIncial() {
     point = 0
-    peliculaSec1 = selectRandomPeli(parametro);
+    peliculaSec1 = await selectRandomPeli(parametro);
     replaceSec1(peliculaSec1); //falta definir variable y UI // DOM
-    peliculaSec2 = selectRandomPeli(parametro);
+    peliculaSec2 = await selectRandomPeli(parametro);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
 }
 
 //prepara las variables para el juego luego de la seleccion
-function changeGame(buttonparametro) {
+async function changeGame(buttonparametro) {
     parametro = buttonparametro
     console.log(parametro)
-    seleccionIncial()
-    changeScreen()//falta hacer ui y DOM
+    closeModalPlay()
+    await seleccionIncial()
+    changeScreen()
 }
 //prepara el juego devuelta
-function playAgain() {
-    seleccionIncial()
+async function playAgain() {
+    await seleccionIncial()
     closeModalFinal()
 }
 
@@ -64,42 +66,63 @@ function playAgain() {
 //seccion finalizo
 
 
+
 //inicia la finalizacion luego de elegir
-function buttonAnswer(selecctionAnswer) {//hacer llegar el atributo del boton
-    if (peliculaSec1.parametro > peliculaSec2.parametro) {
+function buttonAnswer1() {
+    answer(peliculaSec1)
+}
+
+function buttonAnswer2() {
+    answer(peliculaSec2)
+}
+
+async function answer(selecctionAnswer) {//hacer llegar el atributo del boton
+    console.log("selecctionAnswer")
+    console.log(selecctionAnswer)
+    console.log("peliculaSec1[0].parametro:")
+    console.log(peliculaSec1[0].parametro)
+    console.log("peliculaSec2[0].parametro:")
+    console.log(peliculaSec2[0].parametro)
+
+    if (peliculaSec1[0].parametro > peliculaSec2[0].parametro) {
+        console.log("1")
         correctAnswer = peliculaSec1
-    } if (peliculaSec2.parametro > peliculaSec1.parametro) {
-        correctAnswer = peliculaSec1
+    } else if (peliculaSec1[0].parametro < peliculaSec2[0].parametro) {
+        console.log("2")
+        correctAnswer = peliculaSec2
     } else {
+        console.log("igual")
         correctAnswer = "igual"
     }
-    if (selecctionAnswer == corretcAnswer || correctAnswer == "igual") {
+    if (selecctionAnswer == correctAnswer || correctAnswer == "igual") {
+        console.log("correcto")
         point++
-        replaceSelection()
+        await replaceSelection()
     } else {
-        let maxPoint = fetchGetRecordPuntaje(id_user)
-        // Parametro dado ID de user. Parametro a espera Max Points
-        if (maxPoint < point) {
-            maxPoint = point
-            fetchPutRecord(id_user, maxPoint)
-            // Parametro dado ID de user y puntos max.
-        }
-        let tenPlace = getLastMaxPoint()//establecer funcion fetch get max puntos 
-        // Parametro recibe el decimo puesto de la tabla (puntaje)
-        if (tenPlace < maxPoint) {
-            putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
-            //parametro dado id del user y puntos maximos
-        }
-        replaceandshowModalFinal(maxPoint, point)
-
+        console.log("incorrecto")
+            // let maxPoint = fetchGetRecordPuntaje(id_user)
+            // // Parametro dado ID de user. Parametro a espera Max Points
+            // if (maxPoint < point) {
+            //     maxPoint = point
+            //     await fetchPutRecord(id_user, maxPoint)
+            //     // Parametro dado ID de user y puntos max.
+            // }
+            // let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
+            // // Parametro recibe el decimo puesto de la tabla (puntaje)
+            // if (tenPlace < maxPoint) {
+            //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
+            //     //parametro dado id del user y puntos maximos
+            // }
+        // await replaceandshowModalFinal(maxPoint, point)
+        showModalFinal()
     }
 }
 
 //cambia de posicion y busca nueva peli
-function replaceSelection() {
+async function replaceSelection() {
     peliculaSec1 = peliculaSec2
     replaceSec1(peliculaSec1); //falta definir variable y UI // DOM
-    peliculaSec2 = selectRandomPeli(parametro);
+    peliculaSec2 = await selectRandomPeli(parametro);
     replaceSec2(peliculaSec2); //falta definir variable y UI // DOM
 }
 //Inicio de sesión
@@ -119,7 +142,6 @@ async function login() {
         id_user = check[0].id_usuario
         alert("Iniciando sesion")
         showModalCuenta()
-        changeScreen()
         await llenarDatosPersonal(id_user)
     } else if (check == "0") { //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
         alert("Error. No se ha ingresado correctamente la contraseña")
@@ -130,6 +152,7 @@ async function login() {
 
 function closeAccount() {
     id_user = -1
+    alert("Cerrando sesión")
     showModalCuenta()
     document.getElementById("inputUser").value = ""
     document.getElementById("inputPassword").value = ""
