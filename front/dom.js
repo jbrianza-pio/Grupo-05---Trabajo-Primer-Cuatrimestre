@@ -76,23 +76,24 @@ function closeModalFinal(){
 // dom index
 function changeScreen(){
     if (menu!=0) {
-        document.getElementById("playPart").style.display = 'contents'
+        document.getElementById("playPart").style.display = ''
         document.getElementById("mainMenu").style.display = 'none'
         menu=0
     } else {
-        document.getElementById("mainMenu").style.display = 'contents'
+        document.getElementById("mainMenu").style.display = ''
         document.getElementById("playPart").style.display = 'none'
         menu=1
     }
 }
 
 function replaceSec1(peliculaSec1){
-    document.getElementsByClassName("namePeli1")[0].textContent=peliculaSec1[0]
-    document.getElementsByClassName("namePeli1")[1].textContent=peliculaSec1[0]
+    console.log(peliculaSec1[0].titulo)
+    document.getElementById("namePeli1_0").innerHTML=peliculaSec1[0].titulo
+    document.getElementById("namePeli1_1").innerHTML=peliculaSec1[0].titulo
     //modificar imagen de fondo css
 }
 function replaceSec2(peliculaSec2){
-    document.getElementsByClassName("namePeli2")[0].textContent=peliculaSec2[0]
-    document.getElementsByClassName("namePeli2")[1].textContent=peliculaSec2[0]
+    document.getElementById("namePeli2_0").innerHTML=peliculaSec2[0].titulo
+    document.getElementById("namePeli2_1").innerHTML=peliculaSec2[0].titulo
     //modificar imagen de fondo css
 }
