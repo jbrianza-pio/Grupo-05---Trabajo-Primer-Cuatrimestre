@@ -154,7 +154,7 @@ async function llenarDatosPersonal(id_user) {   //Recibe el id de usuario del ju
     document.getElementById("puntajePropio").innerText = puntajeJugador[0].record
 }
 
-async function fetchPutRecord(puntaje, id_usuario) {
+async function fetchPutRecord(id_usuario, puntaje) {
     try {
         let datos = {
             puntaje: puntaje,

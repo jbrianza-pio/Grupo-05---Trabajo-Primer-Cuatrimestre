@@ -107,7 +107,7 @@ async function answer(selecctionAnswer) {//hacer llegar el atributo del boton
             //     await fetchPutRecord(id_user, maxPoint)
             //     // Parametro dado ID de user y puntos max.
             // }
-            // let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
+            // let tenPlace = await fetchGetUltimoMejorPuntaje()//establecer funcion fetch get max puntos 
             // // Parametro recibe el decimo puesto de la tabla (puntaje)
             // if (tenPlace < maxPoint) {
             //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 

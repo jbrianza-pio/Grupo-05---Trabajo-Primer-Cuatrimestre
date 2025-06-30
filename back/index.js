@@ -212,3 +212,17 @@ app.get('/getLastMaxPoint', async function (res) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 })
+
+//SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR 
+//MODIFICAR ULTIMO PUNTAJE
+
+app.put('/modificarUltimoPuntaje', async function (req, res) {
+    try{
+        const ultimo = await realizarQuery(`select puntaje from Puntajes order by puntaje limit 1`)
+        await realizarQuery(`UPDATE Puntajes SET
+        puntaje='${req.body.puntaje}' WHERE id_puntaje='${ultimo.id_puntaje}'`);
+        res.send({ mensaje: "Décimo puntaje modificado correctamente" });
+    }catch(error){
+        res.send({mensaje: "Tuviste un error", error: error.message})}
+})
+//SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR 
