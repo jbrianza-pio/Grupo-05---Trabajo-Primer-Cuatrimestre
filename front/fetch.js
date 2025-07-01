@@ -154,7 +154,7 @@ async function llenarDatosPersonal(id_user) {   //Recibe el id de usuario del ju
     document.getElementById("puntajePropio").innerText = puntajeJugador[0].record
 }
 
-async function fetchPutRecord(puntaje, id_usuario) {
+async function fetchPutRecord(id_usuario, puntaje) {
     try {
         let datos = {
             puntaje: puntaje,
@@ -174,4 +174,102 @@ async function fetchPutRecord(puntaje, id_usuario) {
         alert("Hubo un error: ")
 
     }
+}
+
+async function fetchGetPuntaje() {
+    try {
+        response = await fetch(`http://localhost:4000/getPuntaje`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+    }
+
+}
+
+
+async function fetchPostPuntajes(fecha, puntaje, id_usuario) {
+    let datos = {
+        fecha: fecha,
+        puntaje: puntaje,
+        id_usuario: id_usuario
+    };
+    try {
+        response = await fetch(`http://localhost:4000/insertarPuntaje`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        console.log(response);
+        let result = await response.json();
+        console.log(result);
+        alert(result.mensaje);
+    } catch (error) {
+        alert("Hubo un error: ");
+    }
+}
+
+async function fetchPutPuntajes(puntaje) {
+    try {
+        let datos = {
+            puntaje: puntaje
+        }
+        response = await fetch(`http://localhost:4000/modificarPuntaje`, {
+            method: "PUT", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
+        })
+        let result = await response.json();
+        alert("Se modifico")
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+
+    }
+}
+
+async function fetchBorrarPuntaje(id_pelicula) {
+    let datos = {
+        id_pelicula: id_pelicula
+    };
+    try {
+        response = await fetch(`http://localhost:4000/borrarPuntaje`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        console.log(response);
+        let result = await response.json();
+        console.log(result);
+        alert("Se borró");
+    } catch (error) {
+        alert("Hubo un error: ");
+    }
+}
+
+async function fetchGetUltimoMejorPuntaje() {
+    try {
+        response = await fetch(`http://localhost:4000/getLastMaxPoint`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+    }
+
 }
