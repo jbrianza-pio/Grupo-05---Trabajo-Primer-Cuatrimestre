@@ -79,7 +79,7 @@ app.get('/peliculas', async function (req, res) {
     try {
         let parametro = req.query.parametro
         let respuesta;
-        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} FROM Peliculas WHERE id_pelicula=${req.query.id_pelicula}`);
+        respuesta = await realizarQuery(`SELECT titulo, link, ${parametro} AS parametro FROM Peliculas WHERE id_pelicula=${req.query.id_pelicula}`);
         res.send(respuesta)
     } catch (error) {
         res.send(error)
@@ -91,7 +91,7 @@ app.delete('/borrarPeliculas', async function (req, res) {
     try {
         await realizarQuery(`
         DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-        res.send({mensaje: "Se elimino correctamente"})
+        res.send({ mensaje: "Se elimino correctamente" })
     } catch (error) {
         res.send(error)
     }
@@ -148,3 +148,67 @@ app.listen(port, () => {
 //Para cambiar el auto-increment del SQL si se generan usuarios de prueba:
 //ALTER TABLE Usuarios AUTO_INCREMENT = 1
 
+/*------------------------------------------------------------------------------------------*/
+/*-----------------------------------------PUNTAJES-----------------------------------------*/
+/*------------------------------------------------------------------------------------------*/
+
+
+//GET PUNTAJES
+app.get('/getPuntaje', async function (req,res) {
+    try {
+        let respuesta = await realizarQuery(`SELECT * FROM Puntajes ORDER BY puntaje`);
+        res.send(respuesta);
+    }
+    catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+})
+
+//POST PUNTAJES
+app.post('/insertarPuntaje', async function (req, res) {
+    try {
+        const check = await realizarQuery(`SELECT * FROM Puntajes WHERE fecha = "${req.body.fecha}" AND puntaje = "${req.body.puntaje}" AND id_usuario = "${req.body.id_usuario}"`)
+
+        if (check.length == 0) {
+            await realizarQuery(` INSERT INTO Puntajes (fecha, puntaje, id_usuario)
+                VALUES ("${req.body.fecha}", "${req.body.puntaje}", "${req.body.id_usuario}"); `)
+            res.send({ mensaje: "Puntaje agregado correctamente" });
+        }
+        else {
+            res.send({ mensaje: "Puntaje ya existe" })
+        }
+    } catch(error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+});
+
+//PUT PUNTAJES
+app.put('/modificarPuntaje', async function (req, res) {
+    try{
+        await realizarQuery(`UPDATE Puntajes SET
+        puntaje='${req.body.puntaje}' WHERE id_puntaje='${req.body.id_puntaje}'`);
+        res.send({ mensaje: "Puntaje modificado correctamente" });
+    }catch(error){
+        res.send({mensaje: "Tuviste un error", error: error.message})}
+})
+
+//DELETE PUNTAJES
+app.delete('/borrarPuntaje', function (req, res) {
+    try{
+    realizarQuery(`DELETE FROM Puntajes WHERE id_puntaje = '${req.body.id_puntaje}'`)
+        res.send({ mensaje: "Puntaje borrado correctamente" });
+    }catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+})
+
+//GET DÉCIMO PUNTAJE
+app.get('/getLastMaxPoint', async function (res) {
+    try {
+        let respuesta = await realizarQuery(`select puntaje from Puntajes order by puntaje limit 1`);
+        res.send(respuesta);
+    }
+    catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+})

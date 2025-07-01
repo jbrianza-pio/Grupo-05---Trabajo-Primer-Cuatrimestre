@@ -104,8 +104,8 @@ async function llenarDatosRanking() {
     let resulto = await fetchGetUsersRanking();
     for (let i = 0; i < resulto.length; i++) {
         tabla += `<tr>
-            <td>${resulto[i].username}</td>
-            <td>${resulto[i].record}</td>
+            <td><p>${resulto[i].username}</p></td>
+            <td><p>${resulto[i].record}</p></td>
             </tr>`
     }
     document.getElementById("tabla").innerHTML = tabla;
