@@ -89,12 +89,13 @@ function changeScreen(){
 
 function replaceSec1(peliculaSec1){
     console.log(peliculaSec1[0].titulo)
+    console.log(peliculaSec1[0])
     document.getElementById("namePeli1_0").innerHTML=peliculaSec1[0].titulo
     document.getElementById("namePeli1_1").innerHTML=peliculaSec1[0].titulo
-    //modificar imagen de fondo css
+    document.getElementById("namePeli1_0").style.backgroundImage  = `url(${peliculaSec1[0].link})`
 }
 function replaceSec2(peliculaSec2){
     document.getElementById("namePeli2_0").innerHTML=peliculaSec2[0].titulo
     document.getElementById("namePeli2_1").innerHTML=peliculaSec2[0].titulo
-    //modificar imagen de fondo css
+    document.getElementById("namePeli2_0").style.backgroundImage  = `url(${peliculaSec2[0].link})`
 }
