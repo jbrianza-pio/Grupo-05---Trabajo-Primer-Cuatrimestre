@@ -203,26 +203,25 @@ app.delete('/borrarPuntaje', function (req, res) {
 })
 
 //GET DÉCIMO PUNTAJE
-app.get('/getLastMaxPoint', async function (res) {
+app.get('/getLastMaxPoint', async function (req,res) {
     try {
-        let respuesta = await realizarQuery(`select puntaje from Puntajes order by puntaje limit 1`);
+        let respuesta = await realizarQuery(`select puntaje,id_puntaje from Puntajes order by puntaje limit 1`);
         res.send(respuesta);
-    }
-    catch (error) {
+    }catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 })
 
-//SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR 
-//MODIFICAR ULTIMO PUNTAJE
 
+//MODIFICAR ULTIMO PUNTAJE
 app.put('/modificarUltimoPuntaje', async function (req, res) {
     try{
-        const ultimo = await realizarQuery(`select puntaje from Puntajes order by puntaje limit 1`)
+        const ultimo =  await realizarQuery(`select id_puntaje from Puntajes order by puntaje limit 1`);
+        console.log(ultimo)
         await realizarQuery(`UPDATE Puntajes SET
-        puntaje='${req.body.puntaje}' WHERE id_puntaje='${ultimo.id_puntaje}'`);
-        res.send({ mensaje: "Décimo puntaje modificado correctamente" });
+        puntaje='${req.body.puntaje}' WHERE id_puntaje='${ultimo[0].id_puntaje}'`);
+        res.send({mensaje: "Décimo puntaje modificado correctamente"});
     }catch(error){
-        res.send({mensaje: "Tuviste un error", error: error.message})}
+        res.send({mensaje: "Tuviste un error", error: error.message})
+    }
 })
-//SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR SIN TERMINAR 

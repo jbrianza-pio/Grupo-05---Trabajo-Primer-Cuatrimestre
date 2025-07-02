@@ -9,7 +9,7 @@ async function fetchGetPeliculas(id_pelicula, parametro) {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
 }
@@ -35,7 +35,7 @@ async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, lin
         console.log(result);
         alert(result.mensaje);
     } catch (error) {
-        alert("Hubo un error: ");
+        alert("Hubo un error: " + error.message);
     }
 }
 
@@ -56,7 +56,7 @@ async function fetchBorrarPeliculas(id_pelicula) {
         console.log(result);
         alert("Se borró");
     } catch (error) {
-        alert("Hubo un error: ");
+        alert("Hubo un error: " + error.message);
     }
 }
 
@@ -75,7 +75,7 @@ async function fetchGetUsersId(username, password) {
         
         return result.res
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
 }
@@ -93,7 +93,7 @@ async function fetchGetUsersRanking() {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
 }
@@ -129,7 +129,7 @@ async function fetchPostInsertUser(username, password) {
         console.log(result);
         return result
     } catch (error) {
-        alert("Hubo un error: ");
+        alert("Hubo un error: " + error.message);
     }
 }
 
@@ -144,7 +144,7 @@ async function fetchGetRecordPuntaje(id) {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
 }
@@ -171,7 +171,7 @@ async function fetchPutRecord(id_usuario, puntaje) {
         alert("Se modifico")
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
 
     }
 }
@@ -187,7 +187,7 @@ async function fetchGetPuntaje() {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
 }
@@ -212,7 +212,7 @@ async function fetchPostPuntajes(fecha, puntaje, id_usuario) {
         console.log(result);
         alert(result.mensaje);
     } catch (error) {
-        alert("Hubo un error: ");
+        alert("Hubo un error: " + error.message);
     }
 }
 
@@ -232,7 +232,7 @@ async function fetchPutPuntajes(puntaje) {
         alert("Se modifico")
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
 
     }
 }
@@ -254,7 +254,7 @@ async function fetchBorrarPuntaje(id_pelicula) {
         console.log(result);
         alert("Se borró");
     } catch (error) {
-        alert("Hubo un error: ");
+        alert("Hubo un error: " + error.message);
     }
 }
 
@@ -269,7 +269,27 @@ async function fetchGetUltimoMejorPuntaje() {
         let result = await response.json();
         return result
     } catch (error) {
-        alert("Hubo un error: ")
+        alert("Hubo un error: " + error.message);
     }
 
+}
+
+async function fetchPutModificarUltimoPuntaje(puntaje) {
+    let datos = {
+        puntaje: puntaje
+    };
+    try {
+        let response = await fetch(`http://localhost:4000/modificarUltimoPuntaje`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        let result = await response.json();
+        alert(result.mensaje);
+        return result;
+    } catch (error) {
+        alert("Hubo un error: " + error.message);
+    }
 }
