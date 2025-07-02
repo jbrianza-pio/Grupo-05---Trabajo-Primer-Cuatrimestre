@@ -100,19 +100,19 @@ async function answer(selecctionAnswer) {//hacer llegar el atributo del boton
         await replaceSelection()
     } else {
         console.log("incorrecto")
-            let maxPoint = fetchGetRecordPuntaje(id_user)
-            // Parametro dado ID de user. Parametro a espera Max Points
-            if (maxPoint < point) {
-                 maxPoint = point
-                 await fetchPutRecord(id_user, maxPoint)
-                // Parametro dado ID de user y puntos max.
-            }
-            let tenPlace = await fetchGetUltimoMejorPuntaje()
-            // Parametro recibe el decimo puesto de la tabla (puntaje)
-            if (tenPlace < maxPoint) {
-            //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
-            //     //parametro dado id del user y puntos maximos
-            }
+        let maxPoint = fetchGetRecordPuntaje(id_user)
+        // Parametro dado ID de user. Parametro a espera Max Points
+        if (maxPoint < point) {
+                maxPoint = point
+                await fetchPutRecord(id_user, maxPoint)
+            // Parametro dado ID de user y puntos max.
+        }
+        let tenPlace = await fetchGetUltimoMejorPuntaje()
+        // Parametro recibe el decimo puesto de la tabla (puntaje)
+        if (tenPlace < maxPoint) {
+        await fetchPutModificarUltimoPuntaje(id_user,maxPoint)//establecer funcion post max puntos 
+        //parametro dado id del user y puntos maximos
+        }
         await replaceandshowModalFinal(maxPoint, point)
         showModalFinal()
     }

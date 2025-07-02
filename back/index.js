@@ -118,7 +118,7 @@ app.post('/insertarPeliculas', async function (req, res) {
 app.get('/recordPuntaje', async function (req, res) {
     try {
         let respuesta = await realizarQuery(`SELECT record FROM Usuarios WHERE id_usuario = ${req.query.id_usuario}`);
-        res.send(respuesta);
+        res.send({ record: respuesta[0].record });
     } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message })
     }
@@ -218,8 +218,7 @@ app.put('/modificarUltimoPuntaje', async function (req, res) {
     try{
         const ultimo =  await realizarQuery(`select id_puntaje from Puntajes order by puntaje limit 1`);
         console.log(ultimo)
-        await realizarQuery(`UPDATE Puntajes SET
-        puntaje='${req.body.puntaje}' WHERE id_puntaje='${ultimo[0].id_puntaje}'`);
+        await realizarQuery(`UPDATE Puntajes SET puntaje='${req.body.puntaje}', id_usuario=${req.body.id_usuario} WHERE id_puntaje='${ultimo[0].id_puntaje}'`);
         res.send({mensaje: "Décimo puntaje modificado correctamente"});
     }catch(error){
         res.send({mensaje: "Tuviste un error", error: error.message})
