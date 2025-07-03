@@ -4,7 +4,25 @@
     overflow: hidden;
     box-sizing: border-box;
 }
-
+button {
+    background-color: #0CC768;
+    border: none;
+    padding: 15px 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    #paginaPrincipal button {
+        margin: 10px;
+        padding: 18px;
+        box-shadow: 0 2px 8px #0003;
+    }
+}
+button:hover {
+    background-color: #0aa558;
+    transform: translateY(-2px) scale(1.04);
+}
 /* --- ESTILOS BÁSICOS Y BONITOS AGREGADOS ---*/
 
 body {
@@ -19,21 +37,18 @@ body {
     max-width: 600px;
     margin: 14rem auto 0 auto;
     text-align: center;
+    h1{
+        font-size: 4rem;
+        letter-spacing: 2px;
+        margin-bottom: 32px;
+        color: #fff;
+        text-shadow: 0 2px 8px #0008;
+    }
 } 
-
-#mainMenu h1 {
-    font-size: 4rem;
-    letter-spacing: 2px;
-    margin-bottom: 32px;
-    color: #fff;
-    text-shadow: 0 2px 8px #0008;
-} 
-
-
 
 #playPart {
-    margin: 40px auto;
     background: rgba(16, 6, 43, 0.97);
+    height: 100%;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     text-align: center;
     #playPart section {
@@ -59,27 +74,41 @@ body {
         width: 50vw;
         background-repeat: no-repeat;
         background-size:contain;
-        background-position: center;
+        background-position: center 50px;
     }
     #seccionPlay{
         display: flex;
         flex-direction: column;
-        align-items: center;
         #flextop {
             height: 75vh;
             display: flex;
             flex-direction: row;
         }
-    
+        #mediobottom{
+                width: 20vw;
+                min-width: 25px;
+                z-index: 1001;
+            }
         #flexbottom {
             display: flex;
             flex-direction: row;
             vertical-align: top;
+            width: 100%;
             .buttonSelect{
-                width: 30vw;
+                width: 100%;
+                min-width: 75px;
             }
-            #mediobottom{
-                width: 10vw;
+            .selectButton{
+                width: 50vw;
+                height: 25vh;
+                border: solid;
+                border-color: #ffffff;
+            }
+            #peliculas1{
+                background-color: #6533d1 ;
+            }
+            #peliculas2{
+                background-color: #c70c0c;
             }
         }
     }
@@ -106,25 +135,7 @@ body {
 #tabla tr:last-child td {
     border-bottom: none;
 }
-button {
-    background-color: #0CC768;
-    border: none;
-    padding: 15px 30px;
-    color: white;
-    font-weight: bold;
-    font-size: 1.3rem;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    #paginaPrincipal button {
-        margin: 10px;
-        padding: 18px;
-        box-shadow: 0 2px 8px #0003;
-    }
-}
-button:hover {
-    background-color: #0aa558;
-    transform: translateY(-2px) scale(1.04);
-}
+
 /* --- ESTILOS PARA EL MODAL --- */
 .modal {
     border: none;
