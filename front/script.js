@@ -105,7 +105,7 @@ async function answer(selecctionAnswer) {
         await fetchPutModificarUltimoPuntaje(id_user,maxPoint)
         //parametro dado id del user y puntos maximos
         }
-        await replaceandshowModalFinal(maxPoint, point)
+        replaceandshowModalFinal(maxPoint, point)
         showModalFinal()
     }
 }
