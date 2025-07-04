@@ -142,6 +142,7 @@ async function fetchGetRecordPuntaje(id) {
             },
         })
         let result = await response.json();
+        console.log(result);
         return result
     } catch (error) {
         alert("Hubo un error: " + error.message);
@@ -274,8 +275,9 @@ async function fetchGetUltimoMejorPuntaje() {
 
 }
 
-async function fetchPutModificarUltimoPuntaje(puntaje) {
+async function fetchPutModificarUltimoPuntaje(id,puntaje) {
     let datos = {
+        id: id,
         puntaje: puntaje
     };
     try {

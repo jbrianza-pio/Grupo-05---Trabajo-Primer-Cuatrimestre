@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieMasterIndex</title>
+    <link rel="icon" href="../images/image.png" type="image/x-icon">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -80,18 +81,19 @@
             <section id="seccionPlay">
                 <div id="flextop">
                     <h2 id="namePeli1_0">NOMBRE PELICULA 1</h2>
+                    <div id="mediobottom">
+                        <h3 id="pointShow">PUNTOS</h3>
+                        <img src="../images/logo.png" alt="logo">
+                        <h3 id="categoryShow">CATEGORÍA</h3>
+                    </div>
                     <h2 id="namePeli2_0">NOMBRE PELICULA 2</h2>
                 </div>
                 <div id="flexbottom">
                     <div class="buttonSelect">
-                        <button id="peliculas1" onclick="buttonAnswer1()"><h3 id="namePeli1_1">NOMBRE PELICULA 1</h3></button>
-                    </div>
-                    <div id="mediobottom">
-                        <p>PUNTOS</p>
-                        <p>VS</p>
+                        <button class="selectButton" id="peliculas1" onclick="buttonAnswer1()"><h3 id="namePeli1_1">NOMBRE PELICULA 1</h3></button>
                     </div>
                     <div class="buttonSelect">
-                        <button onclick="buttonAnswer2()"><h3 id="namePeli2_1">NOMBRE PELICULA 2</h3></button>
+                        <button class="selectButton" id="peliculas2" onclick="buttonAnswer2()"><h3 id="namePeli2_1">NOMBRE PELICULA 2</h3></button>
                     </div>
                 </div>
             </section>
@@ -110,6 +112,9 @@
                 </div>
             </dialog>
     </section>
+    <footer>
+        
+    </footer>
     <script src="dom.js"></script>
     <script src="fetch.js"></script>
     <script src="script.js"></script>

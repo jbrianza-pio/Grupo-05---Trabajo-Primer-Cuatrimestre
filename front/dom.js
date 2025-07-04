@@ -99,3 +99,10 @@ function replaceSec2(peliculaSec2){
     document.getElementById("namePeli2_1").innerHTML=peliculaSec2[0].titulo
     document.getElementById("namePeli2_0").style.backgroundImage  = `url(${peliculaSec2[0].link})`
 }
+function replacePoint() {
+    document.getElementById("pointShow").innerHTML=point
+}
+function replaceCategory() {
+        console.log("a")
+    document.getElementById("categoryShow").innerHTML=parametro
+}
