@@ -91,21 +91,21 @@ async function answer(selecctionAnswer) {
         await replaceSelection()
     } else {
         let maxPoint = await fetchGetRecordPuntaje(id_user)
-        console.log("maxPoint")
-        console.log(maxPoint)
+        console.log("maxPoint.record")
+        console.log(maxPoint.record)
         // Parametro dado ID de user. Parametro a espera Max Points
-        if (maxPoint < point) {
-                maxPoint = point
-                await fetchPutRecord(id_user, maxPoint)
+        if (maxPoint.record < point) {
+                maxPoint.record = point
+                await fetchPutRecord(id_user, maxPoint.record)
             // Parametro dado ID de user y puntos max.
         }
         let tenPlace = await fetchGetUltimoMejorPuntaje()
         // Parametro recibe el decimo puesto de la tabla (puntaje)
-        if (tenPlace < maxPoint) {
-        await fetchPutModificarUltimoPuntaje(id_user,maxPoint)
+        if (tenPlace < maxPoint.record) {
+        await fetchPutModificarUltimoPuntaje(id_user,maxPoint.record)
         //parametro dado id del user y puntos maximos
         }
-        replaceandshowModalFinal(maxPoint, point)
+        replaceandshowModalFinal(maxPoint.record.record, point)
         showModalFinal()
     }
 }
